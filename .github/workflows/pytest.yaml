@@ -13,16 +13,17 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Dump context
-              uses: crazy-max/ghaction-dump-context@v2.1.0
-
             - name: Setup Python
               uses: actions/setup-python@v5.0.0
               with:
                 python-version: '3.11'
 
-            - name: Install Python Requirements
+            - name: Install dependencies
               run: |
                 python -m pip install --upgrade pip
                 pip install -r requirements.txt
                 pip check
+
+            - name: Pytest
+              run: |
+                pytest

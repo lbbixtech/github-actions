@@ -1,5 +1,5 @@
 name: Pytest
-run-name: Push to ${{ github.ref_type }} by @${{ github.actor }}
+run-name: Push to ${{ github.ref_name }} by @${{ github.actor }}
 on: 
     push:
         branches:

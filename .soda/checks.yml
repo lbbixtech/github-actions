@@ -1,0 +1,7 @@
+# Checks for basic validations
+checks for dim_customer:
+     - row_count between 10 and 20000
+     - missing_count(birth_date) = 0
+     - duplicate_count(customer_key) = 0
+     - total_cost_error = 0:
+          total_cost_error sql_file: sql/total_cost_error.sql

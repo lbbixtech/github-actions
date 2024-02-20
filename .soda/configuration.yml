@@ -1,0 +1,7 @@
+data_source render_postgres:
+  type: postgres
+  host: ${POSTGRES_HOST}
+  username: ${POSTGRES_USERNAME}
+  password: ${POSTGRES_PASSWORD}
+  database: dbbixtech
+  schema: public

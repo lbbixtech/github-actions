@@ -30,7 +30,7 @@ jobs:
             pip install -r requirements.txt
             pip check
         
-        - name: Soda Test Connection
+        - name: Soda Test Connection and Scan
           env:
             POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
             POSTGRES_USERNAME: ${{ secrets.POSTGRES_USERNAME }}
@@ -38,15 +38,3 @@ jobs:
           run: |
             soda test-connection -d render_postgres -c .soda/configuration.yml
             soda scan -d render_postgres -c .soda/configuration.yml .soda/checks.yml
-
-        - name: Soda Library Action
-          uses: sodadata/soda-github-action@v1.0.2
-          env:
-            POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-            POSTGRES_USERNAME: ${{ secrets.POSTGRES_USERNAME }}
-            POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          with:
-            soda_library_version: latest
-            data_source: render_postgres
-            configuration: .soda/configuration.yaml
-            checks: .soda/checks.yaml

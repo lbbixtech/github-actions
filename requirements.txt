@@ -1,2 +1,4 @@
+great-expectations==0.18.9
 pandas==2.2.0
-pytest==8.0.1
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.27

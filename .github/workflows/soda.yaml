@@ -23,7 +23,15 @@ jobs:
                 python -m pip install --upgrade pip
                 pip install -r requirements.txt
                 pip check
-
-            - name: Pytest
+            
+            - name: Install Soda Postgres
               run: |
-                pytest
+                pip install -i https://pypi.cloud.soda.io soda-postgres
+
+            - name: Soda Test Connection
+              env:
+                POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+                POSTGRES_USERNAME: ${{ secrets.POSTGRES_USERNAME }}
+                POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+              run: |
+                soda test-connection -d render_postgres -c .soda/configuration.yml

@@ -5,9 +5,12 @@ on:
         branches:
             - main
             - develop
+    schedule:
+      - cron: '0 */1 * * *'
+
 
 jobs:
-    Pytest:
+    Soda-Core:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -24,10 +27,6 @@ jobs:
                 pip install -r requirements.txt
                 pip check
             
-            - name: Install Soda Postgres
-              run: |
-                pip install -i https://pypi.cloud.soda.io soda-postgres
-
             - name: Soda Test Connection
               env:
                 POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
@@ -35,3 +34,15 @@ jobs:
                 POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
               run: |
                 soda test-connection -d render_postgres -c .soda/configuration.yml
+
+            - name: Soda Library Action
+              uses: sodadata/soda-github-action@v1.0.2
+              env:
+                POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+                POSTGRES_USERNAME: ${{ secrets.POSTGRES_USERNAME }}
+                POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+              with:
+                soda_library_version: latest
+                data_source: render_postgres
+                configuration: .soda/configuration.yaml
+                checks: .soda/checks.yaml

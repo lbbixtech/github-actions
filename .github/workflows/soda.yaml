@@ -9,8 +9,8 @@ on:
       branches:
         - main
 
-    schedule:
-      - cron: '0 */12 * * *'
+    # schedule:
+    #   - cron: '0 */12 * * *'
 
 jobs:
     Soda-Core:
